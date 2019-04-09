@@ -8,6 +8,7 @@
 
 \def\Z{\mathbb{Z}}
 \def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
 
 \begin{document}
 \title{Introduction to Koopman operator theory of dynamical systems}
@@ -114,11 +115,11 @@ The Koopman operator theory provides a new perspective on the problem, where
 instead of considering the evolution of states, we consider the evolution
 of observables.
 
-Formally, we consider the vector space $\mathcal{F}$ of real valued observables
+Formally, we consider the vector space $\mathcal{F}$ of real-valued observables
 from $S$ to $\R$.
 Then the Koopman operator is a linear operator on this space, defined as
 \begin{equation}
-    Ug(x) = g\circ T(x).
+    U g(x) = g\circ T(x).
 \end{equation}
 In the case of continuous time systems, we define a semi-group of operators
 $(U^t)_{t \geq 0}$, where each element is defined by
@@ -128,10 +129,38 @@ $(U^t)_{t \geq 0}$, where each element is defined by
 where $F^t$ is the flow map defined in \eqref{flow}.
 
 The advantage of the Koopman operator is that it models the evolution of a
-non linear dynamical system by the evolution of linear system.
+nonlinear dynamical system by the evolution of linear system.
 And the disadvantage is that it operates on an infinite dimensional space.
 
 We hope to address this issue by discretizing the function space, and replacing
 the Koopman operator by a finite dimensional approximation.
 
+\section{Koopman linear expansion}%
+\label{sec:koopman_linear_expansion}
+
+Being a linear operator, we can gain deeper insight into the Koopman operator
+by looking at its eigenvalues and eigenvectors.
+Let $\phi_j:S\to \C$ be a complex-valued observable of the dynamical system
+\eqref{diff_eq} and $\lambda_j$ a complex number.
+We call the couple $(\phi_j, \lambda_j)$ an eigenfunction-eigenvalue pair of
+the Koopman operator if
+\begin{equation}
+    \label{eig}
+    U^t\phi_j = e^{\lambda_j t} \phi_j
+\end{equation}
+One interesting properties of the Koopman eigenfunctions is that if
+$(\phi_i, \lambda_i)$ and $(\phi_j, \lambda_j)$ are eigenfunction-eigenvalue
+pairs, then so is $(\phi_i \cdot \phi_j, \lambda_i + \lambda_j)$.
+
+Let us assume that all the observables can be written as linear combinations of
+such Koopman eigenfunctions, i.e.,
+\begin{equation}
+    g(x) = \sum_{k=0}^{\infty}g_k \phi_k(x).
+\end{equation}
+Then the evolution of the observable is given by
+\begin{equation}
+    U^t g(x) = \sum_{k=0}^{\infty}g_k e^{\lambda_k t} \phi_k(x).
+\end{equation}
+This expansion holds for a large class of nonlinear dynamical systems,
+including ones with hyperbolic fixed points, limit cycles and tori.
 \end{document}
