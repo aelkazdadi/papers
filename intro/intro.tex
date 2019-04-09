@@ -9,6 +9,7 @@
 \def\Z{\mathbb{Z}}
 \def\R{\mathbb{R}}
 \def\C{\mathbb{C}}
+\def\g{\mathbf{g}}
 
 \begin{document}
 \title{Introduction to Koopman operator theory of dynamical systems}
@@ -170,4 +171,34 @@ exponentials and sinusoids.
 Other types of systems possess mixed spectra, part discrete and part continuous.
 And so the linear expansion only holds for part of the data.
 
+\section{Koopman Mode Decomposition (KMD)}%
+\label{sec:koopman_mode_decomposition_kmd_}
+
+In practice, we usually get data of dynamical systems from multiple
+observables.
+We can integrate those into the Koopman operator framework by using
+vector-valued observables $\g:S\to \R^m$.
+
+We can then apply the linear Koopman expansion on each component of $\g$
+to obtain a vector-valued linear expansion for it,
+\begin{equation}
+    U^t \g(x) = \sum_{k=0}^{\infty} \g_k e^{\lambda_k t}\phi_k(x).
+\end{equation}
+We call it the \textit{Koopman Mode Decomposition (KMD)} of the observable $\g$
+and $\g_k$ is called the \textit{Koopman mode} of $\g$ at the eigenvalue
+$\lambda_k$.
+Koopman modes are therefore the projection of the observable onto the Koopman
+eigenfunctions.
+
+In some physical problems, we have a \textit{field of observables}, i.e., an
+observable that maps each state to a physical field.
+For example, the observable that maps a fluid flow to the pressure field.
+Formally, the field of observables is defined as a function $g:(S, \Omega)\to
+\R$, where $\Omega$ is the flow domain, and $g(x,z)$ determines the value of
+the field at point $z$ when the flow is at state $x$.
+In this case, the Koopman Mode Decomposition is written as
+\begin{equation}
+    U^t g(x, z) = \sum{k=0}^{\infty} \g_k(z) e^{\lambda_k t}\phi_k(x),
+\end{equation}
+and the Koopman mode $\g_k(z)$ is a fixed field.
 \end{document}
