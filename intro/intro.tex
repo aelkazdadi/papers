@@ -4,6 +4,7 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amsthm}
+\usepackage{microtype}
 
 \def\Z{\mathbb{Z}}
 \def\R{\mathbb{R}}
@@ -14,38 +15,123 @@
 \date{}
 \maketitle
 
-
 \section{Dynamical Systems}%
 \label{sec:dynamical_systems}
 
 A dynamical system consists of a set of \textit{states}  $S$ and a
 \textit{rule}  for the evolution of the points of that set.\\
-In the case of discrete time, this rule is represented by an operator $T:S\to S$.
+In the case of discrete time, this rule is represented by a map $T:S\to S$.
 And the points $(x_t)_{t\in \Z}$ evolve over time such that
-\[
+\begin{equation}
     x_{t+1} = T(x_t).
-\]
+\end{equation}
 In the case of continuous time, the evolution rule is represented by a
 differential equation
-\[
+\begin{equation}
     \dot x(t) = f(x).
-\]
+    \label{diff_eq}
+\end{equation}
 In this case, we additionally define the \textit{flow map} $F^t:S\to S$ for
 each $t > 0$ as the map taking the initial state to the one at time $t$.
-\[
+\begin{equation}
     F^t(x_0) = x_t.
-\]
+    \label{flow}
+\end{equation}
 This map satisfies the semi-group property, i.e.,
-\begin{align*}
+\begin{equation}
     \forall s, t > 0, F^t \circ F^s(x_0) = F^t(x_s) = x_{t+s} = F^{t+s}(x_0),
-\end{align*}
+\end{equation}
 where $\circ$ is the composition operator.
 
-\section{Important notions}%
+\section{Important Notions}%
 \label{sec:important_notions}
 
-\subsection{Fixed point}%
+\subsection{Fixed Point}%
 \label{sub:fixed_point}
 
-abc
+A fixed point is a point $x$ such that $f(x)=0$ (equivalently, $\forall t > 0,
+F^t(x)=x$).
+Fixed points correspond to equilibria of dynamical systems.
+We usually take an interest in the stability of such points, i.e., whether
+trajectories that start near the fixed point remain close to it over time or
+not.
+
+\subsection{Limit Cycle}%
+\label{sub:limit_cycle}
+
+Limit cycles are isolated closed curves in the state space which correspond to
+time-periodic solutions of \eqref{diff_eq}.
+They can be generalized to tori, which are associated with quasi-periodic
+motion.
+
+\subsection{Invariant Set}%
+\label{sub:invariant_set}
+
+An invariant set $B$ satisfies $F^t(B) \subset B$ for all $t > 0$, i.e., the
+trajectories starting in $B$ remain in $B$.
+Invariant sets are important because we can isolate them from the rest of the
+space and limit ourselves to their dynamics.
+
+\subsection{Attractor}%
+\label{sub:attractor}
+
+An attractor is an attracting set containing a dense orbit.
+An attracting set is a subset to which many initial conditions converge.
+A dense orbit is a trajectory that comes arbitrarily close to any point on the
+attractor.
+Attractors tend to determine the long term dynamics of dissipative systems.
+
+\subsection{Bifurcation}%
+\label{sub:bifurcation}
+
+Bifurcation analysis is the study of changes in qualitative properties of the
+trajectories due to changes in the vector field $f$ (or the map $T$),
+such as the stability of fixed points or the existence of limit cycles.
+
+Historically, dynamical systems have been studied by solving them analytically
+or approximatively, then analyzing their dynamics.
+But this has proven difficult when high-dimensional spaces are involved,
+due to huge computational cost of solving the systems, as well as difficulties
+in visualizing the solutions and their geometric properties.
+Another issue is that the models that govern most dynamical systems in the real
+world are sometimes uncertain or even completely unknown, a situation that the
+classical tools aren't capable of dealing with.
+
+This has pushed the field of dynamical analysis away from model-based
+techniques to a more data-driven perspective, which is further reinforced by
+the wide availability of data today.
+The Koopman operator theory is a framework that manages to integrate data into
+the mathematical analysis of dynamical systems.
+
+\section{The Data-driven Viewpoint}%
+\label{sec:the_data_driven_viewpoint}
+
+In the context of dynamical systems, data is viewed as knowledge of some
+variables related to the state of the system, i.e., functions of the state.
+We call these functions \textit{observables} of the system.
+
+The Koopman operator theory provides a new perspective on the problem, where
+instead of considering the evolution of states, we consider the evolution
+of observables.
+
+Formally, we consider the vector space $\mathcal{F}$ of real valued observables
+from $S$ to $\R$.
+Then the Koopman operator is a linear operator on this space, defined as
+\begin{equation}
+    Ug(x) = g\circ T(x).
+\end{equation}
+In the case of continuous time systems, we define a semi-group of operators
+$(U^t)_{t \geq 0}$, where each element is defined by
+\begin{equation}
+    U^t g (x) = g\circ F^t(x),
+\end{equation}
+where $F^t$ is the flow map defined in \eqref{flow}.
+
+The advantage of the Koopman operator is that it models the evolution of a
+non linear dynamical system by the evolution of linear system.
+And the disadvantage is that it operates on an infinite dimensional space.
+
+We hope to address this issue by discretizing the function space, and replacing
+the Koopman operator by a finite dimensional approximation.
+
 \end{document}
