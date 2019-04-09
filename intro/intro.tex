@@ -5,10 +5,47 @@
 \usepackage{amsfonts}
 \usepackage{amsthm}
 
+\def\Z{\mathbb{Z}}
+\def\R{\mathbb{R}}
+
 \begin{document}
 \title{Introduction to Koopman operator theory of dynamical systems}
-\author{Aamr \textsc{El Kazdadi}}
+\author{}
 \date{}
 \maketitle
 
+
+\section{Dynamical Systems}%
+\label{sec:dynamical_systems}
+
+A dynamical system consists of a set of \textit{states}  $S$ and a
+\textit{rule}  for the evolution of the points of that set.\\
+In the case of discrete time, this rule is represented by an operator $T:S\to S$.
+And the points $(x_t)_{t\in \Z}$ evolve over time such that
+\[
+    x_{t+1} = T(x_t).
+\]
+In the case of continuous time, the evolution rule is represented by a
+differential equation
+\[
+    \dot x(t) = f(x).
+\]
+In this case, we additionally define the \textit{flow map} $F^t:S\to S$ for
+each $t > 0$ as the map taking the initial state to the one at time $t$.
+\[
+    F^t(x_0) = x_t.
+\]
+This map satisfies the semi-group property, i.e.,
+\begin{align*}
+    \forall s, t > 0, F^t \circ F^s(x_0) = F^t(x_s) = x_{t+s} = F^{t+s}(x_0),
+\end{align*}
+where $\circ$ is the composition operator.
+
+\section{Important notions}%
+\label{sec:important_notions}
+
+\subsection{Fixed point}%
+\label{sub:fixed_point}
+
+abc
 \end{document}
