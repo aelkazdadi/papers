@@ -1,0 +1,82 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage[]{microtype}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+
+\def\X{\mathcal{X}}
+\def\R{\mathbb{R}}
+\newcommand{\inner}[2]{\left\langle #1 \vert #2 \right\rangle}
+
+\begin{document}
+\title{Kernels, RKHS}
+\author{}
+\date{}
+\maketitle
+
+\section{Definitions}%
+\label{sec:definition}
+
+\begin{defn}[Positive Definite Kernel]
+    Let $\X$ be a nonempty set, and $k:\X\times\X \to \R$ a symmetric function.
+    $k$ is called a positive definite kernel if, given a finite number of
+    points $x_1, \dots, x_m \in \X$, we have
+    \[
+         \forall c \in \R^m \quad
+        \sum_{i=1}^{m} c_i \bar c_j k(x_i, x_j) \geq 0.
+    \]
+i.e., the Gram matrix $K = \big(k(x_i, x_j)\big)_{1 \leq i, j \leq m}$ is positive
+semi-definite.
+\end{defn}
+
+\begin{defn}[Reproducing Kernel Hilbert Space]
+    Let $\X$ be a nonempty set, and $ \mathcal{H}$ a Hilbert space of functions
+    $f:\X\to\R$.
+    $ \mathcal{H} $ is called a reproducing kernel Hilbert space endowed with
+    the dot product $\inner{\cdot}{\cdot}$ if there exists a function
+    with the following properties.
+    \begin{enumerate}
+        \item $k$ has the reproducing property
+            \[
+                \forall f\in \mathcal{H} \inner{f}{k(x,\cdot)} = f(x).
+            \]
+            In particular,
+            \[
+                \inner{k(x, \cdot)}{k(x', \cdot)} = k(x,x').
+            \]
+        \item $k$ spans $ \mathcal{H}$, i.e., $ \mathcal{H}=\overline{\operatorname{span}
+            \{k(x,\cdot) \vert x\in \X\} } $
+    \end{enumerate}
+\end{defn}
+
+\begin{defn}[Conditionally Positive Definite Matrix]
+    A matrix $K \in \R^{m,m}$ is called a conditionally positive definite
+    matrix if, for all $c \in \R^m$ such that $\sum_{i=1}^{m} c_i = 0$, we have
+    \[
+        \sum_{i=1}^{m} c_i \bar c_j K_{ij} \geq 0.
+    \]
+\end{defn}
+
+\begin{defn}[Conditionally Positive Definite Kernel]
+    A kernel $k:\X\times\X \to \R$ is called conditionally positive definite kernel if
+    for any points $x_1, \dots, x_m \in \X$, the Gram matrix $K = \big(k(x_i,
+    x_j)\big)_{1 \leq i, j \leq m}$ is conditionally positive definite
+\end{defn}
+
+\begin{prop}[Constructing PD Kernels from CPD Kernels]
+    Let $x_0 \in \X$, and let $k$ be a symmetric kernel on $\X\times\X$, then
+    \[
+        \tilde k(x,x') := \frac{1}{2} \left(k(x, x') - k(x, x_0), - k(x_0, x') + k(x_0, x_0)\right)
+    \]
+    is positive definite if and only if $k$ is conditionally positive definite.
+\end{prop}
+
+\end{document}
